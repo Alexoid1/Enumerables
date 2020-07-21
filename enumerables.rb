@@ -1,4 +1,4 @@
-# rubocop:disable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity, Lint/Void, Style/MixinUsage
+# rubocop:disable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity, Lint/Void
 p '-----------|||||--------'
 p '----------{(o o)}--------'
 p '--------ooO-(_)-Ooo------'
@@ -234,7 +234,6 @@ def multiply_els(array)
   array.my_inject(:*)
 end
 
-
 puts '****Enumerables*******'
 puts
 puts '=======my_each======='
@@ -330,4 +329,4 @@ puts 'multiply_els method test'
 p multiply_els([2, 4, 5])
 p '------------------------'
 
-# rubocop:enable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity, Lint/Void, Style/MixinUsage
+# rubocop:enable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity, Lint/Void
