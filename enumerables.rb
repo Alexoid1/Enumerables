@@ -46,23 +46,23 @@ module Enumerables
       end
       return true elsif arg.empty?
     elsif arg[0].class == Class
-      array_3 = to_a
-      cont_2 = 0
-      array_3.length.times do |b|
-        if array_3[b].is_a?(arg[0])
-          cont_2 += 1
-          return true if cont_2 == array_3.length
+      array3 = to_a
+      cont2 = 0
+      array3.length.times do |b|
+        if array3[b].is_a?(arg[0])
+          cont2 += 1
+          return true if cont2 == array3.length
           next
         end
         return false
       end
     elsif arg[0].class == Regexp
-      array_3 = to_a
-      cont_2 = 0
-      array_3.length.times do |b|
-        if arg[0].match(array_3[b])
-          cont_2 += 1
-          return true if cont_2 == array_3.length
+      array3 = to_a
+      cont2 = 0
+      array3.length.times do |b|
+        if arg[0].match(array3[b])
+          cont2 += 1
+          return true if cont2 == array3.length
           next
         end
         return false
@@ -84,16 +84,16 @@ module Enumerables
       end
       return true elsif arg.empty?
     elsif arg[0].class == Class
-      array_3 = to_a
-      array_3.length.times do |b|
-        return true if array_3[b].is_a?(arg[0])
+      array3 = to_a
+      array3.length.times do |b|
+        return true if array3[b].is_a?(arg[0])
         return false
       end
     elsif arg[0].class == Regexp
-      array_3 = to_a
+      array3 = to_a
 
-      array_3.length.times do |b|
-        return true if arg[0].match(array_3[b])
+      array3.length.times do |b|
+        return true if arg[0].match(array3[b])
         return false
       end
     end
@@ -117,23 +117,23 @@ module Enumerables
     elsif arg.empty?
       return false
     elsif arg[0].class == Class
-      array_3 = to_a
-      cont_2 = 0
-      array_3.length.times do |b|
-        if array_3[b].is_a?(arg[0])
-          cont_2 += 1
-          return false if cont_2 == array_3.length
+      array3 = to_a
+      cont2 = 0
+      array3.length.times do |b|
+        if array3[b].is_a?(arg[0])
+          cont2 += 1
+          return false if cont2 == array3.length
           next
         end
         return true
       end
     elsif arg[0].class == Regexp
-      array_3 = to_a
-      cont_2 = 0
-      array_3.length.times do |b|
-        if arg[0].match(array_3[b])
-          cont_2 += 1
-          return false if cont_2 == array_3.length
+      array3 = to_a
+      cont2 = 0
+      array3.length.times do |b|
+        if arg[0].match(array3[b])
+          cont2 += 1
+          return false if cont2 == array3.length
           next
         end
         return true
@@ -144,24 +144,24 @@ end
 module Enumerables
   def my_count(*arg)
     return 'error arguments' if arg.length > 1
-    cont_1 = 0
+    cont1 = 0
     array = to_a
     if block_given?
       array.length.times do |a|
         array[a]
-        cont_1 += 1 if yield (array[a])
+        cont1 += 1 if yield (array[a])
         next
       end
-      return cont_1
+      return cont1
     else
       if arg.empty?
         return array.length
       else
         array.length.times do |a|
-          cont_1 += 1 if array[a].eql?(arg[0])
+          cont1 += 1 if array[a].eql?(arg[0])
           next
         end
-        return cont_1
+        return cont1
       end
     end
   end
@@ -169,30 +169,30 @@ module Enumerables
   def my_map(*arg)
     return 'error arguments' if arg.length > 1
     array = to_a
-    array_2 = []
+    array2 = []
     if block_given?
 
       size.times do |index|
-        array_2 << yield(array[index])
-        array_2
+        array2 << yield(array[index])
+        array2
       end
-      return array_2
+      return array2
     else
       if arg.empty?
         return to_enum
       else arg[0].class == Proc
 
            size.times do |index|
-             array_2 << arg[0].call(array[index])
+             array2 << arg[0].call(array[index])
            end
-           return array_2
+           return array2
       end
     end
   end
 
   def my_inject(number = nil, symbol = nil)
     array = to_a
-    array_2 = []
+    array2 = []
     acum = 0
     if block_given?
 
