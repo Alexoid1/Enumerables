@@ -21,14 +21,12 @@ module Enumerables
     return to_enum unless block_given?
 
     array = to_a
-    array_2 = []
+    arraya = []
     array.length.times do |a|
       array[a]
-      if yield (array[a])
-        array_2 << array[a]
-      end
+      arraya << array[a] if yield (array[a]) 
     end
-    array_2  
+    arraya  
   end
 
   def my_all?(*arg)  
@@ -41,24 +39,19 @@ module Enumerables
         array[a]
         if yield (array[a])
           cont += 1
-          if cont==array.length
-            return true   
-          end
+          return true if cont==array.length
           next
         end
         return false
       end
-    elsif arg.empty?
-     return true
+    return true elsif arg.empty?    
     elsif  arg[0].class == Class
       array_3 = to_a 
       cont_2 = 0
       array_3.length.times do |b|
         if array_3[b].is_a?(arg[0])
           cont_2 += 1
-          if cont_2==array_3.length
-            return true
-          end
+          return true if cont_2==array_3.length
           next    
         end
         return false
@@ -69,36 +62,29 @@ module Enumerables
       array_3.length.times do |b|
         if arg[0].match(array_3[b])
           cont_2 += 1
-          if cont_2 == array_3.length
-            return true
-          end
+          return true if cont_2 == array_3.length
           next   
         end
         return false
       end
-   
-    end  
-    
+    end   
   end
 end 
+
 module Enumerables 
   def my_any?(*arg)
-    
     return "error arguments" if arg.length > 1
+
     if block_given?
       array = to_a     
       array.length.times do |a|
         array[a]
-        if yield (array[a])           
-          return true   
-        end
+        return true if yield (array[a])           
         return false
       end
-    elsif arg.empty?
-     return true 
+    return true elsif arg.empty?
     elsif  arg[0].class == Class
       array_3 = to_a       
-      
       array_3.length.times do |b|
         if array_3[b].is_a?(arg[0])             
           return true        
