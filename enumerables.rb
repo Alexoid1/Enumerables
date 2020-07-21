@@ -1,4 +1,4 @@
-# rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity, Metrics/LineLength
+# rubocop:disable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
 p '-----------|||||--------'
 p '----------{(o o)}--------'
 p '--------ooO-(_)-Ooo------'
@@ -41,11 +41,12 @@ module Enumerables
         if yield (array[a])
           cont += 1
           return true if cont == array.length
+
           next
         end
         return false
       end
-      return true elsif arg.empty?
+      true elsif arg.empty?
     elsif arg[0].class == Class
       array3 = to_a
       cont2 = 0
@@ -53,6 +54,7 @@ module Enumerables
         if array3[b].is_a?(arg[0])
           cont2 += 1
           return true if cont2 == array3.length
+
           next
         end
         return false
@@ -64,6 +66,7 @@ module Enumerables
         if arg[0].match(array3[b])
           cont2 += 1
           return true if cont2 == array3.length
+
           next
         end
         return false
@@ -81,9 +84,11 @@ module Enumerables
       array.length.times do |a|
         array[a]
         return true if yield (array[a])
+
         return false
       end
       return true elsif arg.empty?
+
     elsif arg[0].class == Class
       array3 = to_a
       array3.length.times do |b|
@@ -102,6 +107,7 @@ module Enumerables
 
   def my_none?(*arg)
     return 'error arguments' if arg.length > 1
+
     if block_given?
       array = to_a
       cont = 0
@@ -110,12 +116,13 @@ module Enumerables
         if yield (array[a])
           cont += 1
           return false if cont == array.length
+
           next
         end
         return true
       end
     elsif arg.empty?
-      return false
+      false
     elsif arg[0].class == Class
       array3 = to_a
       cont2 = 0
@@ -123,6 +130,7 @@ module Enumerables
         if array3[b].is_a?(arg[0])
           cont2 += 1
           return false if cont2 == array3.length
+
           next
         end
         return true
@@ -144,6 +152,7 @@ end
 module Enumerables
   def my_count(*arg)
     return 'error arguments' if arg.length > 1
+
     cont1 = 0
     array = to_a
     if block_given?
@@ -155,6 +164,7 @@ module Enumerables
       return cont1
     else
       return array.length if arg.empty?
+
       array.length.times do |a|
         cont1 += 1 if array[a].eql?(arg[0])
         next
@@ -165,6 +175,7 @@ module Enumerables
 
   def my_map(*arg)
     return 'error arguments' if arg.length > 1
+
     array = to_a
     array2 = []
     if block_given?
@@ -175,6 +186,7 @@ module Enumerables
       end
     else
       return to_enum if arg.empty?
+
       arg[0].class == Proc
       size.times do |index|
         array2 << arg[0].call(array[index])
@@ -191,8 +203,8 @@ module Enumerables
         acum += yield(acum, array[a])
       end
       return acum if number.nil?
-      return acum + number
 
+      acum + number
     else
       !number.nil? && symbol.nil?
       if number.class == Integer
@@ -200,13 +212,13 @@ module Enumerables
         size.times do |x|
           acum += array[x]
         end
-        return acum
+        acum
       elsif number.class == Float
         acum = number
         size.times do |x|
           acum += array[x]
         end
-        return acum
+        acum
       elsif number.class == Symbol || number.class == String
         accumulator = nil
         my_each { |index| accumulator = accumulator.nil? ? index : accumulator.send(number, index) }
@@ -234,8 +246,8 @@ puts
 puts
 puts '=======my_select======='
 p [2, 2, 3, 4].my_select(&:even?)
-p(%w[carlos paul maria diana].my_select { |x|  x != 'paul' })
-p(%w[carlos paul maria diana].my_select { |x|  x == 'maria' })
+p(%w[carlos paul maria diana].my_select { |x| x != 'paul' })
+p(%w[carlos paul maria diana].my_select { |x| x == 'maria' })
 puts
 puts
 puts '===========my_all?=========='
@@ -315,4 +327,4 @@ puts 'multiply_els method test'
 p multiply_els([2, 4, 5])
 p '------------------------'
 
-# rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity, Metrics/LineLength
+# rubocop:enable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
