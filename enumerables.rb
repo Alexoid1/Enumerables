@@ -1,7 +1,6 @@
 p '-----------|||||--------'
 p '----------{(o o)}--------'
 p '--------ooO-(_)-Ooo------'
-
 module Enumerables
   def my_each
     return to_enum unless block_given?
@@ -103,7 +102,6 @@ module Enumerables
     return 'error arguments' if arg.length > 1
     if block_given?
       array = to_a
-      array2 = []
       cont = 0
       array.length.times do |a|
         array[a]
@@ -154,16 +152,13 @@ module Enumerables
       end
       return cont1
     else
-      if arg.empty?
-        return array.length
-      else
-        array.length.times do |a|
-          cont1 += 1 if array[a].eql?(arg[0])
-          next
-        end
-        return cont1
+      return array.length if arg.empty?
+      array.length.times do |a|
+        cont1 += 1 if array[a].eql?(arg[0])
+        next
       end
     end
+    cont1
   end
 
   def my_map(*arg)
@@ -176,58 +171,44 @@ module Enumerables
         array2 << yield(array[index])
         array2
       end
-      return array2
     else
-      if arg.empty?
-        return to_enum
-      else arg[0].class == Proc
-
-           size.times do |index|
-             array2 << arg[0].call(array[index])
-           end
-           return array2
+      return to_enum if arg.empty?
+      arg[0].class == Proc
+      size.times do |index|
+        array2 << arg[0].call(array[index])
       end
     end
+    array2
   end
 
   def my_inject(number = nil, symbol = nil)
     array = to_a
-    array2 = []
     acum = 0
     if block_given?
-
-      if number.nil?
-        size.times do |a|
-          acum += yield(acum, array[a])
-        end
-        return acum
-      else
-
-        size.times do |a|
-          acum += yield(acum, array[a])
-        end
-        return acum + number
+      size.times do |a|
+        acum += yield(acum, array[a])
       end
+      return acum if number.nil?
+      return acum + number
 
     else
-      if !number.nil? && symbol.nil?
-        if number.class == Integer
-          acum = number
-          size.times do |x|
-            acum += array[x]
-          end
-          return acum
-        elsif number.class == Float
-          acum = number
-          size.times do |x|
-            acum += array[x]
-          end
-          return acum
-        elsif number.class == Symbol || number.class == String
-          accumulator = nil
-          my_each { |index| accumulator = accumulator.nil? ? index : accumulator.send(number, index) }
-          accumulator
+      !number.nil? && symbol.nil?
+      if number.class == Integer
+        acum = number
+        size.times do |x|
+          acum += array[x]
         end
+        return acum
+      elsif number.class == Float
+        acum = number
+        size.times do |x|
+          acum += array[x]
+        end
+        return acum
+      elsif number.class == Symbol || number.class == String
+        accumulator = nil
+        my_each { |index| accumulator = accumulator.nil? ? index : accumulator.send(number, index) }
+        accumulator
       end
     end
   end
@@ -235,6 +216,7 @@ end
 def multiply_els(array)
   array.my_inject(:*)
 end
+
 include Enumerables
 puts '****Enumerables*******'
 puts
@@ -311,8 +293,8 @@ puts '============my_map=========='
 puts 'my_map with a Block'
 p([1, 2, 3].my_map { |x| x + 2 })
 puts 'my_map with a proc'
-proc_1 = proc { |x| x.is_a? String }
-p [1, 2, 'sdgfsdfg'].my_map(proc_1)
+proc1 = proc { |x| x.is_a? String }
+p [1, 2, 'sdgfsdfg'].my_map(proc1)
 puts
 puts
 puts '============my_inject=========='
