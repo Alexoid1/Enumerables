@@ -1,4 +1,4 @@
-# rubocop:disable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity, Lint/Void
+# rubocop:disable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity, Lint/Void, Style/MixinUsage
 p '-----------|||||--------'
 p '----------{(o o)}--------'
 p '--------ooO-(_)-Ooo------'
@@ -144,6 +144,7 @@ module Enumerables
         if arg[0].match(array3[b])
           cont2 += 1
           return false if cont2 == array3.length
+
           next
         end
         return true
@@ -329,4 +330,4 @@ puts 'multiply_els method test'
 p multiply_els([2, 4, 5])
 p '------------------------'
 
-# rubocop:enable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity, Lint/Void
+# rubocop:enable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity, Lint/Void, Style/MixinUsage
