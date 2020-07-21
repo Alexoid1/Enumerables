@@ -3,27 +3,24 @@ p '----------{(o o)}--------'
 p '--------ooO-(_)-Ooo------'
 
 module Enumerables
-  def my_each
-    
+  def my_each    
     return to_enum unless block_given?
+
     array = to_a
-    size.times { |index| yield(array[index]) }
-     
+    size.times { |index| yield(array[index]) }  
   end
 
   def my_each_with_index
-    
     return to_enum unless block_given?
+    
     array = to_a
-    size.times { |index| yield(array[index],index) }
-     
+    size.times { |index| yield(array[index],index) }  
   end
- 
+
   def my_select
-    
     return to_enum unless block_given?
-    array = to_a
-    
+
+    array = to_a   
     array_2 = []
     array.length.times do |a|
       array[a]
