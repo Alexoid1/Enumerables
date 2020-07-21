@@ -3,40 +3,44 @@ p '----------{(o o)}--------'
 p '--------ooO-(_)-Ooo------'
 
 module Enumerables
-  def my_each    
+  def my_each  
     return to_enum unless block_given?
+
     array = to_a
-    size.times { |index| yield(array[index]) }  
+    size.times { |index| yield(array[index]) } 
   end
 
   def my_each_with_index
     return to_enum unless block_given?
+    
     array = to_a
-    size.times { |index| yield(array[index],index) }  
+    size.times { |index| yield(array[index], index) }
   end
 
   def my_select
     return to_enum unless block_given?
-    array = to_a   
+    
+    array = to_a
     array_2 = []
     array.length.times do |a|
       array[a]
       if yield (array[a])
         array_2 << array[a]
-      end  
+      end
     end
-    array_2    
+    array_2  
   end
 
   def my_all?(*arg)  
     return "error arguments" if arg.length > 1
+
     if block_given?
-      array = to_a    
-      cont=0
+      array = to_a
+      cont = 0
       array.length.times do |a|
         array[a]
         if yield (array[a])
-          cont+=1
+          cont += 1
           if cont==array.length
             return true   
           end
@@ -45,22 +49,22 @@ module Enumerables
         return false
       end
     elsif arg.empty?
-     return true 
+     return true
     elsif  arg[0].class == Class
-      array_3 = to_a       
-      cont_2=0
+      array_3 = to_a 
+      cont_2 = 0
       array_3.length.times do |b|
         if array_3[b].is_a?(arg[0])
           cont_2 += 1
           if cont_2==array_3.length
             return true
           end
-          next          
+          next    
         end
         return false
       end
-    elsif arg[0].class == Regexp   
-      array_3 = to_a       
+    elsif arg[0].class == Regexp
+      array_3 = to_a     
       cont_2 = 0
       array_3.length.times do |b|
         if arg[0].match(array_3[b])
@@ -68,7 +72,7 @@ module Enumerables
           if cont_2 == array_3.length
             return true
           end
-          next          
+          next   
         end
         return false
       end
