@@ -2,7 +2,7 @@
 p '-----------|||||--------'
 p '----------{(o o)}--------'
 p '--------ooO-(_)-Ooo------'
-# Initial Comment
+# Initial comment
 module Enumerables
   def my_each
     return to_enum unless block_given?
@@ -101,7 +101,7 @@ module Enumerables
 
       array3.length.times do |b|
         return true if arg[0].match(array3[b])
-        
+
         return false
       end
     end
