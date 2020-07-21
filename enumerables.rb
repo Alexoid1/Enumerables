@@ -3,7 +3,7 @@ p '-----------|||||--------'
 p '----------{(o o)}--------'
 p '--------ooO-(_)-Ooo------'
 # Initial comment
-module Enumerables
+module Enumerable
   def my_each
     return to_enum unless block_given?
 
@@ -75,7 +75,7 @@ module Enumerables
   end
 end
 
-module Enumerables
+module Enumerable
   def my_any?(*arg)
     return 'error arguments' if arg.length > 1
 
@@ -152,7 +152,7 @@ module Enumerables
     end
   end
 end
-module Enumerables
+module Enumerable
   def my_count(*arg)
     return 'error arguments' if arg.length > 1
 
@@ -234,7 +234,7 @@ def multiply_els(array)
   array.my_inject(:*)
 end
 
-include Enumerables
+
 puts '****Enumerables*******'
 puts
 puts '=======my_each======='
