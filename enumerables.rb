@@ -24,9 +24,9 @@ module Enumerables
     arraya = []
     array.length.times do |a|
       array[a]
-      arraya << array[a] if yield (array[a]) 
+      arraya << array[a] if yield (array[a])
     end
-    arraya  
+    arraya
   end
 
   def my_all?(*arg)  
