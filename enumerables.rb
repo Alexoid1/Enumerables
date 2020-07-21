@@ -1,4 +1,4 @@
-# rubocop:disable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
+# rubocop:disable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity, Lint/Void
 p '-----------|||||--------'
 p '----------{(o o)}--------'
 p '--------ooO-(_)-Ooo------'
@@ -87,12 +87,13 @@ module Enumerables
 
         return false
       end
-      return true elsif arg.empty?
+      true elsif arg.empty?
 
     elsif arg[0].class == Class
       array3 = to_a
       array3.length.times do |b|
         return true if array3[b].is_a?(arg[0])
+
         return false
       end
     elsif arg[0].class == Regexp
@@ -100,6 +101,7 @@ module Enumerables
 
       array3.length.times do |b|
         return true if arg[0].match(array3[b])
+        
         return false
       end
     end
@@ -327,4 +329,4 @@ puts 'multiply_els method test'
 p multiply_els([2, 4, 5])
 p '------------------------'
 
-# rubocop:enable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
+# rubocop:enable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity, Lint/Void
