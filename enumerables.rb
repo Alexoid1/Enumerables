@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity, Metrics/LineLength
 p '-----------|||||--------'
 p '----------{(o o)}--------'
 p '--------ooO-(_)-Ooo------'
@@ -313,3 +314,5 @@ p [2, 4, 7, 8].my_inject('+')
 puts 'multiply_els method test'
 p multiply_els([2, 4, 5])
 p '------------------------'
+
+# rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity, Metrics/LineLength
