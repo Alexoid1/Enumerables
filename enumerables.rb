@@ -1,8 +1,7 @@
-p"-----------|||||--------"
-p"----------{(o o)}--------"
-p"--------ooO-(_)-Ooo------"
+p '-----------|||||--------'
+p '----------{(o o)}--------'
+p '--------ooO-(_)-Ooo------'
 
- 
 module Enumerables
   def my_each
     
@@ -84,6 +83,8 @@ module Enumerables
     end  
     
   end
+end 
+module Enumerables 
   def my_any?(*arg)
     
     return "error arguments" if arg.length > 1
@@ -167,6 +168,8 @@ module Enumerables
       end
     end 
   end
+end
+module Enumerables  
   def my_count(*arg)
 
     return "error arguments" if arg.length > 1
