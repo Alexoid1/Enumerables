@@ -39,7 +39,7 @@ To get a local copy  and to set it up and running follow these simple example st
 - Open Terminal
 - Change directory to folder to download repository
 - Use cd <file-path>
-- Run git clone https://github.com/Alexoid1/Bubble-Sort
+- Run git clone https://github.com/Alexoid1/Enumerables
 - Install Ruby
 - Run ruby main.rb
 
