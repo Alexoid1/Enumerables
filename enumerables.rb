@@ -250,8 +250,8 @@ puts
 puts
 puts '=======my_select======='
 p [2, 2, 3, 4].my_select(&:even?)
-p %w[carlos paul maria diana].my_select { |x|  x != 'paul' }
-p %w[carlos paul maria diana].my_select { |x|  x == 'maria' }
+p(%w[carlos paul maria diana].my_select { |x|  x != 'paul' })
+p(%w[carlos paul maria diana].my_select { |x|  x == 'maria' })
 puts
 puts
 puts '===========my_all?=========='
@@ -265,7 +265,7 @@ p %w[all art afk arg abs].my_all?(/a/)
 p %w[bazooca bob moon sun fagds].my_all?(/b/)
 puts 'my_all with Block'
 p [2, 4, 6, 8, 0].my_all?(&:even?)
-p ['sa', 'sdfsd', 'fr', 0].my_all? { |x| x.is_a? String }
+p(['sa', 'sdfsd', 'fr', 0].my_all? { |x| x.is_a? String })
 puts
 puts
 puts '===========my_any?============'
@@ -279,7 +279,7 @@ p %w[all art afk arg abs].my_any?(/z/)
 p %w[bazooca bob moon sun fagds].my_any?(/b/)
 puts 'my_any? with Block'
 p [2, 4, 6, 8, 0].my_any?(&:odd?)
-p ['sa', 'sdfsd', 'fr', 0].my_any? { |x| x.is_a? String }
+p(['sa', 'sdfsd', 'fr', 0].my_any? { |x| x.is_a? String })
 puts
 puts
 puts '============my_none?=========='
@@ -293,7 +293,7 @@ p %w[all art afk arg abs].my_none?(/z/)
 p %w[bazooca bob moon sun fagds].my_none?(/b/)
 puts 'my_none with Block'
 p [2, 4, 6, 8, 0].my_none?(&:odd?)
-p ['sa', 'sdfsd', 'fr', 0].my_none? { |x| x.is_a? Hash }
+p(['sa', 'sdfsd', 'fr', 0].my_none? { |x| x.is_a? Hash })
 puts
 puts
 puts '============my_count=========='
@@ -303,13 +303,13 @@ puts 'my_count with argument'
 p [9, 4, 6, 0].my_count(6)
 p ['str', 4, 6, 0, 'str'].my_count('str')
 puts 'my_count with a Block'
-p [2, 0, 6, 8, 678].my_count { |x| x == 2 }
-p [2, 0, 'DF', 8, 6.78].my_count { |x| x.is_a? Integer }
+p([2, 0, 6, 8, 678].my_count { |x| x == 2 })
+p([2, 0, 'DF', 8, 6.78].my_count { |x| x.is_a? Integer })
 puts
 puts
 puts '============my_map=========='
 puts 'my_map with a Block'
-p [1, 2, 3].my_map { |x| x + 2 }
+p([1, 2, 3].my_map { |x| x + 2 })
 puts 'my_map with a proc'
 proc_1 = proc { |x| x.is_a? String }
 p [1, 2, 'sdgfsdfg'].my_map(proc_1)
@@ -317,7 +317,7 @@ puts
 puts
 puts '============my_inject=========='
 puts 'my_inject just with a Block'
-p [2, 4, 7, 8].my_inject { |ac, n| ac + n }
+p([2, 4, 7, 8].my_inject { |ac, n| ac + n })
 puts 'my_inject just with a Block and a argument'
 p [2, 4, 7, 8].my_inject(25) { |ac, n| ac + n }
 puts 'my_inject just with a number as argument'
