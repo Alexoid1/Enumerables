@@ -10,7 +10,6 @@ module Enumerable
     array = to_a
     size.times { |index| yield(array[index]) }
     self
-
   end
 
   def my_each_with_index
