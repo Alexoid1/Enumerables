@@ -9,13 +9,16 @@ module Enumerable
 
     array = to_a
     size.times { |index| yield(array[index]) }
+    self
+
   end
 
   def my_each_with_index
     return to_enum unless block_given?
-
-    array = to_a
+    
+    array=to_a
     size.times { |index| yield(array[index], index) }
+    self
   end
 
   def my_select
@@ -32,7 +35,8 @@ module Enumerable
 
   def my_all?(*arg)
     return 'error arguments' if arg.length > 1
-
+   
+    
     if block_given?
       array = to_a
       cont = 0
@@ -46,7 +50,15 @@ module Enumerable
         end
         return false
       end
-      true elsif arg.empty?
+    elsif arg.empty?
+      array = to_a
+      cont = 0
+      array.length.times do |a|
+        if array[a].class == FalseClass || array[a].nil?
+          return false 
+        end    
+      end
+      return true
     elsif arg[0].class == Class
       array3 = to_a
       cont2 = 0
@@ -59,6 +71,18 @@ module Enumerable
         end
         return false
       end
+    elsif arg[0].class == Integer || arg[0].class == Float || arg[0].class == String
+      array3 = to_a
+      cont2 = 0
+      array3.length.times do |b|
+        if array3[b].eql?(arg[0])
+          cont2 += 1
+          return true if cont2 == array3.length
+
+          next
+        end
+        return false
+      end    
     elsif arg[0].class == Regexp
       array3 = to_a
       cont2 = 0
@@ -87,8 +111,22 @@ module Enumerable
 
         return false
       end
-      true elsif arg.empty?
-
+    elsif arg.empty?
+      array = to_a
+      cont = 0
+      array.length.times do |a|
+        if array[a].class == FalseClass || array[a].nil?
+          return false 
+        end    
+      end
+      return true
+    elsif arg[0].class == Integer || arg[0].class == Float || arg[0].class == String
+      array3 = to_a
+      cont2 = 0
+      array3.length.times do |b|
+        return true if array3[b].eql?(arg[0])
+      end
+      return false   
     elsif arg[0].class == Class
       array3 = to_a
       array3.length.times do |b|
@@ -109,7 +147,7 @@ module Enumerable
 
   def my_none?(*arg)
     return 'error arguments' if arg.length > 1
-
+    a = true
     if block_given?
       array = to_a
       cont = 0
@@ -124,32 +162,44 @@ module Enumerable
         return true
       end
     elsif arg.empty?
-      false
+      array = to_a
+      cont = 0
+      array.length.times do |a|
+        if array[a].class == FalseClass || array[a].nil?
+          return true
+        end    
+      end
+      return false
     elsif arg[0].class == Class
       array3 = to_a
       cont2 = 0
       array3.length.times do |b|
         if array3[b].is_a?(arg[0])
-          cont2 += 1
-          return false if cont2 == array3.length
-
-          next
-        end
-        return true
+          return false
+        end  
       end
+      return true
     elsif arg[0].class == Regexp
       array3 = to_a
       cont2 = 0
       array3.length.times do |b|
         if arg[0].match(array3[b])
-          cont2 += 1
-          return false if cont2 == array3.length
-
-          next
-        end
-        return true
+          return false
+        end 
       end
-    end
+      return true
+    elsif arg[0].class == Integer || arg[0].class == Float || arg[0].class == String
+      array3 = to_a
+      cont2 = 0
+      array3.length.times do |b|
+        if array3[b] != arg[0]
+          cont2 += 1
+            return true if cont2 == array3.length
+        end
+      end
+      return false
+    end   
+    
   end
 end
 module Enumerable
@@ -238,12 +288,15 @@ puts '****Enumerables*******'
 puts
 puts '=======my_each======='
 
-[1, 2, 3, 'ewerw'].my_each { |x| print x.to_s + ' ' }
+p [1, 2, 3, 'ewerw'].my_each { |x| x}
 puts
 
 puts '========my_each_with_index========'
 
-[1, 2, 3, 'ewerw'].my_each_with_index { |x, y| print x, " index #{y}", puts }
+[1, 2, 3, 'ewerw'].my_each_with_index { |x, y| print "#{x}", " index #{y}", puts }
+puts
+[1, 2, 3, 'ewerw'].my_each_with_index {|x, y| puts "#{x} ,#{y}"}
+puts (1..9).my_each_with_index {|x, y| puts "#{x} ,#{y}"}
 puts
 puts
 puts '=======my_select======='
@@ -255,9 +308,15 @@ puts
 puts '===========my_all?=========='
 puts 'my_all without argument'
 p [2, 4, 6, 8, 0].my_all?
+p [2, 4, 6, 8, false].my_all?
 puts 'my_all with a class argument'
 p [2, 4, 6, 8.7, 0].my_all?(Integer)
 p [2, 4, 6, 8, 0].my_all?(Integer)
+puts 'my_all with a number argument'
+p [2, 4, 6, 8, 0].my_all?(3)
+p [2, 4, 6, 8, 0].my_all?(3.14456456)
+puts 'my_all with a string argument'
+p ["a", "a"].my_all?("a")
 puts 'my_all with a Regex argument'
 p %w[all art afk arg abs].my_all?(/a/)
 p %w[bazooca bob moon sun fagds].my_all?(/b/)
@@ -269,6 +328,12 @@ puts
 puts '===========my_any?============'
 puts 'my_any? without argument'
 p [2, 4, 6, 8, 0].my_any?
+p [2, 4, 6, 8, false].my_any?
+puts 'my_any with a number argument'
+p [2, 4, 6, 8, 0].my_any?(3)
+p [2, 4, 6, 8, 0].my_any?(3.14456456)
+puts 'my_any with a string argument'
+p ["a", "v"].my_any?("a")
 puts 'my_any? with a class argument'
 p [2, 4, 6, 8.7, 0].my_any?(String)
 p [2, 4, 6, 8, 0].my_any?(Integer)
@@ -283,6 +348,7 @@ puts
 puts '============my_none?=========='
 puts 'my_none without argument'
 p [2, 4, 6, 8, 0].my_none?
+p [2, 4, 6, 8, false].my_none?
 puts 'my_none with a class argument'
 p [2, 4, 6, 8.7, 0].my_none?(String)
 p [2, 4, 6, 8, 0].my_none?(Integer)
@@ -328,5 +394,6 @@ p [2, 4, 7, 8].my_inject('+')
 puts 'multiply_els method test'
 p multiply_els([2, 4, 5])
 p '------------------------'
+p [2,3,4,5].none?
 
 # rubocop:enable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity, Lint/Void
