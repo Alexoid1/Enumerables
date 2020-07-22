@@ -54,7 +54,7 @@ module Enumerable
       array.length.times do |a|
         return false if array[a].class == FalseClass || array[a].nil?
       end
-      return true
+      true
     elsif arg[0].class == Class
       array3 = to_a
       cont2 = 0
@@ -113,14 +113,14 @@ module Enumerable
       array.length.times do |a|
         return false if array[a].class == FalseClass || array[a].nil?
       end
-      return true
+      true
     elsif arg[0].class == Integer || arg[0].class == Float || arg[0].class == String
       array3 = to_a
 
       array3.length.times do |b|
         return true if array3[b].eql?(arg[0])
       end
-      return false
+      false
     elsif arg[0].class == Class
       array3 = to_a
       array3.length.times do |b|
@@ -141,6 +141,7 @@ module Enumerable
 
   def my_none?(*arg)
     return 'error arguments' if arg.length > 1
+
     true
     if block_given?
       array = to_a
@@ -161,21 +162,21 @@ module Enumerable
       array.length.times do |a|
         return true if array[a].class == FalseClass || array[a].nil?
       end
-      return false
+      false
     elsif arg[0].class == Class
       array3 = to_a
       cont2 = 0
       array3.length.times do |b|
         return false if array3[b].is_a?(arg[0])
       end
-      return true
+      true
     elsif arg[0].class == Regexp
       array3 = to_a
       cont2 = 0
       array3.length.times do |b|
         return false if arg[0].match(array3[b])
       end
-      return true
+      true
     elsif arg[0].class == Integer || arg[0].class == Float || arg[0].class == String
       array3 = to_a
       cont2 = 0
@@ -185,7 +186,7 @@ module Enumerable
           return true if cont2 == array3.length
         end
       end
-      return false
+      false
     end
   end
 end
