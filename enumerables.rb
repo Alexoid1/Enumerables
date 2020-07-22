@@ -1,4 +1,4 @@
-# rubocop:disable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity, Lint/Void
+# rubocop:disable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity, Metrics/AbcSize, Lint/Void
 p '-----------|||||--------'
 p '----------{(o o)}--------'
 p '--------ooO-(_)-Ooo------'
@@ -384,4 +384,4 @@ p multiply_els([2, 4, 5])
 p '------------------------'
 p [2, 3, 4, 5].none?
 
-# rubocop:enable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity, Lint/Void
+# rubocop:enable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity, Metrics/AbcSize, Lint/Void
