@@ -188,6 +188,7 @@ module Enumerable
       end
       false
     end
+    true
   end
 end
 module Enumerable
